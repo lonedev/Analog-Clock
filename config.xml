@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" id="http://lonelydeveloper.org/AnalogClockSD" defaultlocale="en" viewmodes="minimized">
-  <name short="AnalogClockSD">Analog Clock Speed Dial Extension</name>
+  <name short="AnalogClock">Analog Clock</name>
   <description>This is a Speed Dial extension showing a simple analog clock.</description>
   <author>lonedev</author>
-  <icon src="images/icon_64.png"/>
+  <icon src="64x64.png"/>
   <feature name="opera:speeddial" required="false">
     <param name="url" value="http://en.wikipedia.org/wiki/Time"/>
   </feature>
