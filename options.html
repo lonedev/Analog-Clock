@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Analog Clock Options</title>
+    <style>
+      canvas { display: block; }
+      body { font: 13px "helvetica neue",arial,sans-serif; margin: auto; width: 320px; background: #f5f5f5;}
+      
+      .box, .ibox { padding: 4px; margin: 4px; }
+      
+      .box { border: solid #ddd 1px; background: #eee; box-shadow: 0 0 4px #ddd; border-radius: 4px;}
+      .box .box { background: #e5e5e5; }
+      
+      .left { float: left; }
+      .right { float: right; }
+      .brk { clear: both; }
+      
+      .toggle { display: none; }
+      
+      h1, h2, h3, h4 { margin: 0; }
+      
+      input { float: right; }
+    </style>
+  </head>
+  <body>
+    <div class="box left" style="background: white">
+      <canvas width="128" height="128" id="clock"></canvas>
+    </div>
+    
+    <div class="ibox" style="text-align: center; ">
+      <h1>Analog Clock</h1>
+      <p>version 1.0</p>
+      
+      <h2>Preferences</h2>
+      
+      <p>Click on the boxes below to access the properties.</p>
+    </div>
+    
+    <div class="box brk">
+      <h2>Clock</h2><div  class="toggle">
+
+      <div class="box">
+        <label>face color:</label> <input type="color" id="fcolor"/>
+      </div>
+      
+      <div class="box">
+        <label>background color:</label> <input type="color" id="bgcolor"/>
+      </div>
+      
+      <div class="box">
+        <label>border color:</label> <input type="color" id="bocolor"/>
+      </div>
+      </div>
+    </div>
+      
+      
+    <div class="box">
+      <h2>Major scale</h2><div class="toggle">
+      
+      <div class="box">
+        <label>color:</label> <input type="color" id="macolor"/>
+      </div>
+    
+      <div class="box">
+        <label>margin:</label> <input type="range" id="madist" min="0" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>width:</label> <input type="range" id="mawidth" min="1" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>length:</label> <input type="range" id="malength" min="1" max="60"/>
+      </div>
+      </div>
+    </div>
+    
+    
+    <div class="box"/>
+      <h2>Minor scale</h2><div class="toggle">
+      
+      <div class="box">
+        <label>color:</label> <input type="color" id="micolor"/>
+      </div>
+    
+      <div class="box">
+        <label>margin:</label> <input type="range" id="midist" min="0" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>width:</label> <input type="range" id="miwidth" min="1" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>length:</label> <input type="range" id="milength" min="1" max="60"/>
+      </div>
+      </div>
+    </div>
+    
+    <div class="box"/>
+      <h2>Hour hand</h2><div class="toggle">
+      
+      <div class="box">
+        <label>color:</label> <input type="color" id="hcolor"/>
+      </div>
+      
+      <div class="box">
+        <label>width:</label> <input type="range" id="hwidth" min="1" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>head length:</label> <input type="range" id="hhlength" min="0" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>tail length:</label> <input type="range" id="htlength" min="0" max="60"/>
+      </div>
+      </div>
+    </div>
+    
+    <div class="box">
+      <h2>Minute hand</h2><div class="toggle">
+      
+      <div class="box">
+        <label>color:</label> <input type="color" id="mcolor"/>
+      </div>
+      
+      <div class="box">
+        <label>width:</label> <input type="range" id="mwidth" min="1" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>head length:</label> <input type="range" id="mhlength" min="0" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>tail length:</label> <input type="range" id="mtlength" min="0" max="60"/>
+      </div>
+      </div>
+    </div>
+    
+    <div class="box">
+      <h2>Second hand</h2><div class="toggle">
+      
+      <div class="box">
+        <label>color:</label> <input type="color" id="scolor"/>
+      </div>
+      
+      <div class="box">
+        <label>width:</label> <input type="range" id="swidth" min="1" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>head length:</label> <input type="range" id="shlength" min="0" max="60"/>
+      </div>
+      
+      <div class="box">
+        <label>tail length:</label> <input type="range" id="stlength" min="0" max="60"/>
+      </div>
+      </div>
+    </div>
+    
+    <div class="box">
+      <h2>Other</h2><div class="toggle">
+      
+      <div class="box">
+        <label>export preferences:</label> <input type="button" id="export" value="export"/>
+      </div>
+      
+      <div class="box">
+        <label>reset settings:</label> <input type="button" id="reset" value="reset"/>
+      </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center"><p>made by lonedev</p></div>
+    
+    <script type="text/javascript" src="clock.js"/>
+    <script type="text/javascript">
+      // set values of the controls to those in preferences
+      for(var k in pref) {
+        var e = document.getElementById(k);
+        if(e) {
+          e.value = pref[k];
+        }
+      }
+      
+      // set 'onchange' callbacks on all the input elements
+      var inputs = document.getElementsByTagName("input");
+      
+      for(var i = 0; i < inputs.length; i++) {
+        if(!inputs[i].id) continue;
+        inputs[i].onchange = (function(id) {
+          return function() {
+            widget.preferences[id] = this.value; update(); drawClock(canvas, 128, 128); opera.extension.postMessage({what: "update"});
+          }
+        })(inputs[i].id);
+      }
+      
+      // set hiding
+      var hiders = document.querySelectorAll("h2");
+      for(var i = 0; i < hiders.length; i++) {
+        hiders[i].onclick = function() {
+          var next = this.nextSibling;
+          if(next != null) {
+            if(next.style.display == "none") next.style.display = "block";
+            else next.style.display = "none";
+          }
+        }
+      }
+      
+      document.querySelector("#export").onclick = function() {
+        window.open("data:text/plain," + encodeURIComponent(JSON.stringify(widget.preferences, null, " ")), "Analog Clock preferences");
+      }
+      
+      document.querySelector("#reset").onclick = function() {
+        if(confirm("Are you sure you want to revert settings to their default values?")) {
+          for(key in widget.preferences) {
+            widget.preferences[key] = null;
+          }
+        }
+      }
+      
+      // set interval for the canvas
+      var canvas = document.querySelector("#clock");
+    
+      window.setInterval(function() {
+        drawClock(canvas, 128, 128);
+      }, 500);
+    </script>
+  </body>
+</html>
+
