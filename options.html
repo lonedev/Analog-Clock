@@ -10,7 +10,7 @@
       .box, .ibox { padding: 4px; margin: 4px; }
       
       .box { border: solid #ddd 1px; background: #eee; box-shadow: 0 0 4px #ddd; border-radius: 4px;}
-      .box .box { background: #e5e5e5; }
+      .box .box { background: #e5e5e5; position: relative;}
       
       .left { float: left; }
       .right { float: right; }
@@ -20,7 +20,8 @@
       
       h1, h2, h3, h4 { margin: 0; }
       
-      input { float: right; }
+      input { right: 4px; position: absolute;}
+      label { line-height: 21px; }
     </style>
   </head>
   <body>
@@ -41,7 +42,7 @@
       <h2>Clock</h2><div  class="toggle">
 
       <div class="box">
-        <label>face color:</label><input type="color" id="fcolor"/> <div class="brk"></div>
+        <label>face color:</label> <input type="color" id="fcolor"/> <div class="brk"></div>
       </div>
       
       <div class="box">
