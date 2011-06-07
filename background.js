@@ -1,17 +1,20 @@
-window.addEventListener("load", function() {
-  var w = window.innerWidth, h = window.innerHeight;
+var w, h, output, canvas;
+
+var resize = function() {
+  w = window.innerWidth;
+  h = window.innerHeight;
   
-  var output = document.querySelector("output");
-  var canvas = document.createElement("canvas");
+  canvas.setAttribute("width", w);
+  canvas.setAttribute("height", h);
+}
+
+window.addEventListener("load", function() {
+  output = document.querySelector("output");
+  canvas = document.createElement("canvas");
   output.appendChild(canvas);
   
-  window.addEventListener("resize", function() {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    
-    canvas.setAttribute("width", w);
-    canvas.setAttribute("height", h);
-  }, false);
+  resize();
+  window.addEventListener("resize", resize, false);
   
   opera.extension.addEventListener("message", function(event) {
     if(event.data.what == "update") {
