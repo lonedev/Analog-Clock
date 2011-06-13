@@ -15,8 +15,8 @@
       .left { float: left; }
       .right { float: right; }
       .brk { clear: both; }
-      
-      .toggle { display: none; }
+      .hidden { display: none; }
+      .toggle { cursor: pointer; }
       
       h1, h2, h3, h4 { margin: 0; }
       
@@ -31,7 +31,7 @@
     
     <div class="ibox" style="text-align: center; ">
       <h1>Analog Clock</h1>
-      <p>version 1.1</p>
+      <p>version 1.2</p>
       
       <h2>Preferences</h2>
       
@@ -39,7 +39,7 @@
     </div>
     
     <div class="box brk">
-      <h2>Clock</h2><div  class="toggle">
+      <h2 class="toggle">Clock</h2><div  class="hidden">
         <input title="face color" type="color" id="fcolor"/>
         <input title="background color" type="color" id="bgcolor"/>
         <input title="border color" type="color" id="bocolor"/>
@@ -47,7 +47,7 @@
     </div>
       
     <div class="box">
-      <h2>Major scale</h2><div class="toggle">
+      <h2 class="toggle">Major scale</h2><div class="hidden">
         <input title="color" type="color" id="macolor"/>
         <input title="margin" type="range" id="madist" min="0" max="60"/>
         <input title="width" type="range" id="mawidth" min="1" max="60"/>
@@ -56,7 +56,7 @@
     </div>
     
     <div class="box"/>
-      <h2>Minor scale</h2><div class="toggle">
+      <h2 class="toggle">Minor scale</h2><div class="hidden">
         <input title="color" type="color" id="micolor"/>
         <input title="margin" type="range" id="midist" min="0" max="60"/>
         <input title="width" type="range" id="miwidth" min="1" max="60"/>
@@ -65,7 +65,7 @@
     </div>
     
     <div class="box"/>
-      <h2>Hour hand</h2><div class="toggle">
+      <h2 class="toggle">Hour hand</h2><div class="hidden">
         <input title="color" type="color" id="hcolor"/>
         <input title="width" type="range" id="hwidth" min="1" max="60"/>
         <input title="head length" type="range" id="hhlength" min="0" max="60"/>
@@ -74,7 +74,7 @@
     </div>
     
     <div class="box">
-      <h2>Minute hand</h2><div class="toggle">
+      <h2 class="toggle">Minute hand</h2><div class="hidden">
         <input title="color" type="color" id="mcolor"/>
         <input title="width" type="range" id="mwidth" min="1" max="60"/>
         <input title="head length" type="range" id="mhlength" min="0" max="60"/>
@@ -83,7 +83,7 @@
     </div>
     
     <div class="box">
-      <h2>Second hand</h2><div class="toggle">
+      <h2 class="toggle">Second hand</h2><div class="hidden">
         <input title="color" type="color" id="scolor"/>
         <input title="width" type="range" id="swidth" min="1" max="60"/>
         <input title="head length" type="range" id="shlength" min="0" max="60"/>
@@ -92,7 +92,7 @@
     </div>
     
     <div class="box">
-      <h2>Other</h2><div class="toggle">
+      <h2 class="toggle">Other</h2><div class="hidden">
         <input title="export preferences" type="button" id="export" value="export"/>
         <input title="reset settings" type="button" id="reset" value="reset"/> <div class="brk"></div>
       </div>
@@ -138,13 +138,16 @@
       }
       
       // set hiding
-      var hiders = document.querySelectorAll("h2");
+      var hiders = document.querySelectorAll(".toggle");
       for(var i = 0; i < hiders.length; i++) {
         hiders[i].onmousedown = function() {
           var next = this.nextSibling;
           if(next != null) {
-            if(next.style.display == "none") next.style.display = "block";
-            else next.style.display = "none";
+            if(next.className == "hidden") {
+              next.className = "";
+            } else {
+              next.className = "hidden";
+            }
           }
           return false;
         }
