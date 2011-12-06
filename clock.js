@@ -8,6 +8,12 @@ var prefd = {
   href: "http://en.wikipedia.org/wiki/Time"
 };
 
+if(opera.version() == "11.60") {
+  // Opera 11.60 doesn't seem to support shadows in the canvas which make white
+  // clock border invisible. We set it to black.
+  prefd.bocolor = "#000000";
+}
+
 // preference object
 var pref = {};
   
@@ -82,10 +88,12 @@ function drawClock(canvas, w, h) {
   }
   
   // set shadow
-  ctx.shadowOffsetX = 0;
-  ctx.shadowOffsetY = 2;
-  ctx.shadowBlur    = 2;
-  ctx.shadowColor   = 'rgba(0, 0, 0, 0.5)';
+  if(opera.version() != "11.60") {
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 2;
+    ctx.shadowBlur    = 2;
+    ctx.shadowColor   = 'rgba(0, 0, 0, 0.5)';
+  }
   
   var date = new Date();
   
@@ -123,7 +131,9 @@ function drawClock(canvas, w, h) {
   ctx.restore();
   
   // draw glare
-  ctx.shadowColor   = 'rgba(0, 0, 0, 0.0)';
+  if(opera.version() != "11.60") {
+    ctx.shadowColor   = 'rgba(0, 0, 0, 0.0)';
+  }
   //ctx.drawImage(fgimage, -1, -1, 2, 2);
   
   // draw clock face border
