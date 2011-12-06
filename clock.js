@@ -4,7 +4,8 @@ var prefd = {
   swidth: 10, macolor: "#ffffff", micolor: "#000000", fcolor: "#7f7f7f", bgcolor: "#ffffff",
   hhlength: 35, htlength: 14, mhlength: 43, mtlength: 14, shlength: 45,
   stlength: 14, mawidth: 20, miwidth: 10, madist: 14, malength: 16, midist: 14,
-  milength: 11, bgpath: "bgs/b.png", bocolor: "#ffffff"
+  milength: 11, bgpath: "bgs/b.png", bocolor: "#ffffff",
+  href: "http://en.wikipedia.org/wiki/Time"
 };
 
 // preference object

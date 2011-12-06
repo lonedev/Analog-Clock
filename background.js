@@ -14,11 +14,13 @@ window.addEventListener("load", function() {
   output.appendChild(canvas);
   
   resize();
-  window.addEventListener("resize", resize, false);
+  window.addEventListener("resize", resize, false);  
+  opera.contexts.speeddial.url = pref.href;
   
   opera.extension.addEventListener("message", function(event) {
     if(event.data.what == "update") {
       update();
+      opera.contexts.speeddial.url = pref.href;
     }
   }, false);
   
