@@ -3,7 +3,7 @@
 "developer": {"name" : "lonedev", "url" : ""},
 "description" : "This is a Speed Dial extension showing a simple analog clock.",
 "manifest_version" : 2,
-"version" : "1.3",
+"version" : "1.4",
 "background" : {"page" : "index.html"},
 "icons" : {"64": "64x64.png"},
 "options_page" : "options.html",
