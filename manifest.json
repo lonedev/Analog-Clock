@@ -5,10 +5,10 @@
 "manifest_version" : 2,
 "version" : "1.3",
 "background" : {"page" : "index.html"},
-"icons" : {"128": "64x64.png"},
+"icons" : {"64": "64x64.png"},
 "options_page" : "options.html",
 "web_accessible_resources" : ["64x64.png","background.js","bgs/a.png","bgs/b.png","clock.js","style.css"],
-"permissions" : ["https://*/*", "storage", "http://*/*"],
+"permissions" : ["storage"],
 "speeddial" : {"url": "http://en.wikipedia.org/wiki/Time"},
 "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'unsafe-eval';"
 }
