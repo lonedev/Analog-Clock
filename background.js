@@ -1,13 +1,12 @@
-var w, h, output, canvas;
-
-var resize = function() {
+opera.isReady(function(){
+var w = window["w"], h = window["h"], output = window["output"], canvas = window["canvas"];
+var resize = window["resize"] = function() {
   w = window.innerWidth;
   h = window.innerHeight;
   
   canvas.setAttribute("width", w);
   canvas.setAttribute("height", h);
-}
-
+};
 window.addEventListener("load", function() {
   output = document.querySelector("output");
   canvas = document.createElement("canvas");
@@ -28,3 +27,4 @@ window.addEventListener("load", function() {
     drawClock(canvas, w, h);
   }, 500);
 }, false);
+});

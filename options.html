@@ -2,6 +2,7 @@
 
 <html>
   <head>
+    <script src="oex_shim/operaextensions_popup.js"></script>
     <title>Analog Clock Options</title>
     <style>
       canvas { display: block; }
@@ -19,6 +20,9 @@
       .toggle { cursor: pointer; }
       
       h1, h2, h3, h4 { margin: 0; }
+      
+      
+      h1 { font-size: 1.75em; }
       
       input { right: 4px; position: absolute;}
       label { line-height: 21px; }
@@ -55,7 +59,7 @@
       </div>
     </div>
     
-    <div class="box"/>
+    <div class="box">
       <h2 class="toggle">Minor scale</h2><div class="hidden">
         <input title="color" type="color" id="micolor"/>
         <input title="margin" type="range" id="midist" min="0" max="60"/>
@@ -64,7 +68,7 @@
       </div>
     </div>
     
-    <div class="box"/>
+    <div class="box">
       <h2 class="toggle">Hour hand</h2><div class="hidden">
         <input title="color" type="color" id="hcolor"/>
         <input title="width" type="range" id="hwidth" min="1" max="60"/>
@@ -102,78 +106,7 @@
     <div style="text-align: center"><p>made by lonedev</p></div>
     
     <script type="text/javascript" src="clock.js"></script>
-    <script type="text/javascript">
-      // set values of the controls to those in preferences
-      for(var k in pref) {
-        var e = document.getElementById(k);
-        if(e) {
-          e.value = pref[k];
-        }
-      }
-      
-      
-      var inputs = document.getElementsByTagName("input");
-      
-      // decorate inputs
-      for(var i = 0; i < inputs.length; i++) {
-        if(inputs[i].title) {
-          var box = document.createElement("div");
-          box.className = "box";
-          var label = document.createElement("label");
-          label.innerText = inputs[i].title + ":";
-          box.appendChild(label);
-          
-          inputs[i].parentNode.insertBefore(box, inputs[i]);
-          box.appendChild(inputs[i]);
-        }
-      }
-      
-      // set 'onchange' callbacks on all the input elements
-      for(var i = 0; i < inputs.length; i++) {
-        if(!inputs[i].id) continue;
-        inputs[i].onchange = (function(id) {
-          return function() {
-            widget.preferences[id] = this.value; update(); drawClock(canvas, 128, 128); opera.extension.postMessage({what: "update"});
-          }
-        })(inputs[i].id);
-      }
-      
-      // set hiding
-      var hiders = document.querySelectorAll(".toggle");
-      for(var i = 0; i < hiders.length; i++) {
-        hiders[i].onmousedown = function() {
-          var next = this.nextSibling;
-          if(next != null) {
-            if(next.className == "hidden") {
-              next.className = "";
-            } else {
-              next.className = "hidden";
-            }
-          }
-          return false;
-        }
-      }
-      
-      document.querySelector("#export").onclick = function() {
-        window.open("data:text/plain," + encodeURIComponent(JSON.stringify(widget.preferences, null, " ")), "Analog Clock preferences");
-      }
-      
-      document.querySelector("#reset").onclick = function() {
-        if(confirm("Are you sure you want to revert settings to their default values?")) {
-          for(key in prefd) {
-            if(widget.preferences[key]) widget.preferences[key] = prefd[key];
-          }
-          update(); opera.extension.postMessage({what: "update"});
-        }
-      }
-      
-      // set interval for the canvas
-      var canvas = document.querySelector("#clock");
-    
-      window.setInterval(function() {
-        drawClock(canvas, 128, 128);
-      }, 500);
-    </script>
+    <script src="inline_script_option_1.js"></script>
   </body>
 </html>
 

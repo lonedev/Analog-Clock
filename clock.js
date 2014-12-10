@@ -1,5 +1,6 @@
 // default preference object
-var prefd = {
+opera.isReady(function(){
+var prefd = window["prefd"] = {
   hcolor: "#000000", mcolor: "#000000", scolor: "#ed1c24", hwidth: 44, mwidth: 25,
   swidth: 10, macolor: "#ffffff", micolor: "#000000", fcolor: "#7f7f7f", bgcolor: "#ffffff",
   hhlength: 35, htlength: 14, mhlength: 43, mtlength: 14, shlength: 45,
@@ -8,17 +9,11 @@ var prefd = {
   href: "http://en.wikipedia.org/wiki/Time"
 };
 
-if(opera.version() == "11.60") {
-  // Opera 11.60 doesn't seem to support shadows in the canvas which make white
-  // clock border invisible. We set it to black.
-  prefd.bocolor = "#000000";
-}
-
 // preference object
-var pref = {};
-  
+var pref = window["pref"] = {};
+
 // function which updates the preference object
-var update = function() {
+var update = window["update"] = function() {
   for(var key in prefd) {
     if(widget.preferences[key]) {
       if(typeof(prefd[key]) == "number") pref[key] = parseInt(widget.preferences[key]);
@@ -37,7 +32,7 @@ var update = function() {
     pref.fgimage = document.createElement("img");
     pref.fgimage.src = pref.fgpath;
   } else pref.fgimage = null;
-}
+};
 
 // update the prefeence object
 update();
@@ -88,12 +83,10 @@ function drawClock(canvas, w, h) {
   }
   
   // set shadow
-  if(opera.version() != "11.60") {
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 2;
-    ctx.shadowBlur    = 2;
-    ctx.shadowColor   = 'rgba(0, 0, 0, 0.5)';
-  }
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 2;
+  ctx.shadowBlur    = 2;
+  ctx.shadowColor   = 'rgba(0, 0, 0, 0.5)';
   
   var date = new Date();
   
@@ -131,9 +124,7 @@ function drawClock(canvas, w, h) {
   ctx.restore();
   
   // draw glare
-  if(opera.version() != "11.60") {
-    ctx.shadowColor   = 'rgba(0, 0, 0, 0.0)';
-  }
+  ctx.shadowColor   = 'rgba(0, 0, 0, 0.0)';
   //ctx.drawImage(fgimage, -1, -1, 2, 2);
   
   // draw clock face border
@@ -146,3 +137,5 @@ function drawClock(canvas, w, h) {
   
   ctx.restore();
 }
+var drawClock = window["drawClock"] = drawClock;
+});
